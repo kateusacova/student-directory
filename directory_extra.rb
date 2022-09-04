@@ -21,10 +21,10 @@ def print_header
 end
 
 def print(students)
-  # only print students whose name begins with J
+  # only print students whose name is shorter than 12 characters
   array = []
   students.each { |student| 
-    if student[:name][0] == "J"
+    if student[:name].chars.count < 12
       array << student
     end
   }
