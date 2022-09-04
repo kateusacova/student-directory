@@ -21,8 +21,16 @@ def print_header
 end
 
 def print(students)
-  students.each.with_index(1) { |student, i|
-    puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)"
+  # only print students whose name begins with J
+  array = []
+  students.each { |student| 
+    if student[:name][0] == "J"
+      array << student
+    end
+  }
+  
+  array.each.with_index(1) { |student, i|
+      puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)"
   }
 end
 
@@ -34,3 +42,4 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+
