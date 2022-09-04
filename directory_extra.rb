@@ -21,17 +21,12 @@ def print_header
 end
 
 def print(students)
-  # only print students whose name is shorter than 12 characters
-  array = []
-  students.each { |student| 
-    if student[:name].chars.count < 12
-      array << student
-    end
-  }
-  
-  array.each.with_index(1) { |student, i|
-      puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)"
-  }
+  # replaced each() method with control flow method
+  index = 0
+  while index < students.count
+    puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
+    index += 1
+  end
 end
 
 def print_footer(students)
@@ -42,4 +37,7 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+
+
+
 
