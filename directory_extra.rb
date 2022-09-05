@@ -3,16 +3,17 @@ def input_students
   puts "To finish, just leave all fields blank"
 
   students =  []
-  name = gets.chomp
-  cohort = gets.chomp
+  # refactored with parallel assignment
+  name, cohort = gets.chomp, gets.chomp
   
   while !name.empty? do
     # supplies a default value if cohort was not provided
     cohort = "September" if cohort.empty?
     students << {name: name, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} students"
-    name = gets.chomp
-    cohort = gets.chomp
+    # using singular or plural with ternary operator
+    students.count == 1 ? (puts "Now we have #{students.count} student") :
+    (puts "Now we have #{students.count} students")
+    name, cohort = gets.chomp, gets.chomp
   end
 
   students
