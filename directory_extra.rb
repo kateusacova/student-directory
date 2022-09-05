@@ -1,15 +1,19 @@
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
+  puts "Please enter the name, cohort and place of birth of the students"
+  puts "To finish, just leave all fields blank"
 
   students =  []
-
+  # asking for more information
   name = gets.chomp
+  cohort = gets.chomp.to_sym
+  country = gets.chomp
 
   while !name.empty? do
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: cohort, country: country}
     puts "Now we have #{students.count} students"
     name = gets.chomp
+    cohort = gets.chomp.to_sym
+    country = gets.chomp
   end
 
   students
@@ -21,12 +25,9 @@ def print_header
 end
 
 def print(students)
-  # replaced each() method with control flow method
-  index = 0
-  while index < students.count
-    puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
-    index += 1
-  end
+  students.each.with_index(1) { |student, i|
+    puts "#{i}. #{student[:name]} from #{student[:country]} (#{student[:cohort]} cohort)"
+  }
 end
 
 def print_footer(students)
