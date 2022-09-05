@@ -38,8 +38,14 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students".center(50)
 end
 
+def no_students
+  puts "We don't have any students atm".center(50)
+end
+
 students = input_students
 print_header
-print_by_cohort(students)
-print_footer(students)
+# doesn't print students if there are none
+students.count == 0 ? no_students : 
+(print_by_cohort(students)
+print_footer(students))
 
