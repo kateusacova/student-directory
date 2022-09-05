@@ -4,7 +4,8 @@ def input_students
 
   students =  []
   # refactored with parallel assignment
-  name, cohort = gets.chomp, gets.chomp
+  # using alternative to chomp() method
+  name, cohort = gets.delete_suffix("\n"), gets.delete_suffix("\n")
   
   while !name.empty? do
     # supplies a default value if cohort was not provided
@@ -13,7 +14,7 @@ def input_students
     # using singular or plural with ternary operator
     students.count == 1 ? (puts "Now we have #{students.count} student") :
     (puts "Now we have #{students.count} students")
-    name, cohort = gets.chomp, gets.chomp
+    name, cohort = gets.delete_suffix("\n"), gets.delete_suffix("\n")
   end
 
   students
