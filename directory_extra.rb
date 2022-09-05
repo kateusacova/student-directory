@@ -4,13 +4,15 @@ def input_students
 
   students =  []
   name = gets.chomp
-  cohort = gets.chomp.to_sym
+  cohort = gets.chomp
   
   while !name.empty? do
-    students << {name: name, cohort: cohort}
+    # supplies a default value if cohort was not provided
+    cohort = "September" if cohort.empty?
+    students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{students.count} students"
     name = gets.chomp
-    cohort = gets.chomp.to_sym
+    cohort = gets.chomp
   end
 
   students
