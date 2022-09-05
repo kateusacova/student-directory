@@ -23,9 +23,12 @@ def print_header
   puts "-------------".center(50)
 end
 
-def print(students)
-  students.each.with_index(1) { |student, i|
-    puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)".center(50)
+def print_by_cohort(students)
+# printing students by groups
+  groups = students.map { |st| st[:cohort] }.uniq
+  groups.each { |group|
+    puts "#{group} cohort:".center(50)
+    students.each { |student| puts "#{student[:name]}".center(50) if group == student[:cohort] }
   }
 end
 
@@ -35,9 +38,6 @@ end
 
 students = input_students
 print_header
-print(students)
+print_by_cohort(students)
 print_footer(students)
-
-
-
 
