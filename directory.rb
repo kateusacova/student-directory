@@ -86,14 +86,16 @@ def load_students(filename = "students.csv")
   }
   file.close
 end
+
 # added this method to make the code DRY
 def add_students(name, cohort = :november)
   @students << {name: name, cohort: cohort.to_sym}
 end
 
+# modified this method to load data from students.csv by default
+# everytime when program starts
 def try_load_students
-  filename = ARGV.first # first argument from the command line
-  return if filename.nil? # get out of the method if it isn't given
+  filename = "students.csv"
   if File.exist?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} students from #{filename}"
