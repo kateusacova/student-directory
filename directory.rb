@@ -55,15 +55,13 @@ def print_footer
 end
 
 def save_students
-  # open the file for writing
-  file = File.open(which_file, "w")
-  # iterate over the array of students
-  @students.each { |student| 
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open(which_file, "w") { |file| 
+    @students.each { |student| 
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    }
   }
-  file.close
 end
 
 def input_students
@@ -80,12 +78,10 @@ def input_students
 end
 
 def load_students(filename = which_file)
-  file = File.open(filename, "r")
-  file.readlines.each { |line| 
+  File.readlines(filename).each { |line| 
     name, cohort = line.chomp.split(',')
     add_students(name, cohort)
   }
-  file.close
   puts "Loaded #{@students.count} students from #{filename}"
 end
 
