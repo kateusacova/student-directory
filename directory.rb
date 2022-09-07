@@ -22,6 +22,7 @@ def show_students
 end
 
 def select_menu(selection)
+  puts "You selected option #{selection}"
   case selection
   when "1" 
     input_students
