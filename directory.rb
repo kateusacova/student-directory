@@ -1,3 +1,6 @@
+require 'bundler/setup'
+require "csv"
+
 @students = []
 
 def interactive_menu
@@ -55,11 +58,9 @@ def print_footer
 end
 
 def save_students
-  File.open(which_file, "w") { |file| 
+  CSV.open(which_file, "wb") { |csv| 
     @students.each { |student| 
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      csv << [student[:name], student[:cohort]]
     }
   }
 end
@@ -78,8 +79,8 @@ def input_students
 end
 
 def load_students(filename = which_file)
-  File.readlines(filename).each { |line| 
-    name, cohort = line.chomp.split(',')
+  CSV.foreach(filename) { |row| 
+    name, cohort = row
     add_students(name, cohort)
   }
   puts "Loaded #{@students.count} students from #{filename}"
