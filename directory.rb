@@ -3,7 +3,7 @@
 def interactive_menu
   loop do
     print_menu
-    process(STDIN.gets.chomp)
+    select_menu(STDIN.gets.chomp)
   end
 end
 
@@ -21,7 +21,7 @@ def show_students
   print_footer
 end
 
-def process(selection)
+def select_menu(selection)
   case selection
   when "1" 
     input_students
@@ -88,15 +88,14 @@ def load_students(filename = "students.csv")
   puts "Loaded #{@students.count} students from #{filename}"
 end
 
-# added this method to make the code DRY
 def add_students(name, cohort = :november)
   @students << {name: name, cohort: cohort.to_sym}
 end
 
-# modified this method to load data from students.csv by default
+# this method loads data from students.csv by default
 # everytime when program starts if filename is not given
 def try_load_students
-  filename = ARGV.first
+  filename = ARGV.first 
   if filename == nil
     load_students
   elsif File.exist?(filename)
