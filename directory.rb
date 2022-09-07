@@ -1,18 +1,5 @@
 @students = []
 
-def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
-
-  name = STDIN.gets.chomp
-
-  while !name.empty? do
-    @students << {name: name, cohort: :november}
-    puts "Now we have #{@students.count} students"
-    name = STDIN.gets.chomp
-  end
-end
-
 def interactive_menu
   loop do
     print_menu
@@ -78,13 +65,30 @@ def save_students
   file.close
 end
 
+def input_students
+  puts "Please enter the names of the students"
+  puts "To finish, just hit return twice"
+
+  name = STDIN.gets.chomp
+
+  while !name.empty? do
+    add_students(name)
+    puts "Now we have #{@students.count} students"
+    name = STDIN.gets.chomp
+  end
+end
+
 def load_students(filename = "students.csv")
   file = File.open("students.csv", "r")
   file.readlines.each { |line| 
     name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_students(name, cohort)
   }
   file.close
+end
+# added this method to make the code DRY
+def add_students(name, cohort = :november)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def try_load_students
