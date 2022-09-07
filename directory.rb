@@ -15,7 +15,7 @@ def print_menu
   puts "2. Show the students"
   puts "3. Save the list to file"
   puts "4. Load the list from file"
-  puts "9. Exit"
+  puts "5. Exit"
 end
 
 def show_students
@@ -35,7 +35,7 @@ def select_menu(selection)
     save_students
   when "4"
     load_students
-  when "9"
+  when "5"
     exit 
   else 
     puts "I don't know what you meant, please try again"
