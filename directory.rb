@@ -79,12 +79,13 @@ def input_students
 end
 
 def load_students(filename = "students.csv")
-  file = File.open("students.csv", "r")
+  file = File.open(filename, "r")
   file.readlines.each { |line| 
     name, cohort = line.chomp.split(',')
     add_students(name, cohort)
   }
   file.close
+  puts "Loaded #{@students.count} students from #{filename}"
 end
 
 # added this method to make the code DRY
@@ -93,12 +94,13 @@ def add_students(name, cohort = :november)
 end
 
 # modified this method to load data from students.csv by default
-# everytime when program starts
+# everytime when program starts if filename is not given
 def try_load_students
-  filename = "students.csv"
-  if File.exist?(filename)
+  filename = ARGV.first
+  if filename == nil
+    load_students
+  elsif File.exist?(filename)
     load_students(filename)
-    puts "Loaded #{@students.count} students from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist."
     exit
