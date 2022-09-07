@@ -11,6 +11,7 @@ ruby directory.rb
 ```
 
 To run the script and load the data from the existing file use:
+
 ***The data can only be loaded from the csv file.***
 ```shell
 ruby directory.rb your_file.csv
