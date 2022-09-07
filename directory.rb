@@ -10,8 +10,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to file"
+  puts "4. Load the list from file"
   puts "9. Exit"
 end
 
@@ -56,7 +56,7 @@ end
 
 def save_students
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(which_file, "w")
   # iterate over the array of students
   @students.each { |student| 
     student_data = [student[:name], student[:cohort]]
@@ -79,7 +79,7 @@ def input_students
   end
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename = which_file)
   file = File.open(filename, "r")
   file.readlines.each { |line| 
     name, cohort = line.chomp.split(',')
@@ -93,8 +93,6 @@ def add_students(name, cohort = :november)
   @students << {name: name, cohort: cohort.to_sym}
 end
 
-# this method loads data from students.csv by default
-# everytime when program starts if filename is not given
 def try_load_students
   filename = ARGV.first 
   if filename == nil
@@ -105,6 +103,12 @@ def try_load_students
     puts "Sorry, #{filename} doesn't exist."
     exit
   end
+end
+
+def which_file 
+  puts "Type the filename or hit return to use students.csv"
+  file = STDIN.gets.chomp
+  file == "" ? "students.csv" : file
 end
 
 try_load_students
